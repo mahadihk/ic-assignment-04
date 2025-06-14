@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thalix Recipe App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./asset/style.css" />
+  </head>
+  <body class="antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4">
+      <div class="container mx-auto px-4 flex items-center justify-center">
+        <div class="flex items-center space-x-2">
+          <img
+            src="./asset/images/logo.png"
+            alt="Thalix Logo"
+            class="rounded-lg"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-20 text-center text-white relative">
+      <div class="container mx-auto px-4 relative z-10">
+        <h1 class="text-5xl font-extrabold mb-4 leading-tight">
+          Search Your <br />
+          Favorite Recipe
+        </h1>
+        <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+          A handful of simple ingredients typify the fresh, <br />
+          vibrant flavors of Greek cooking.
+        </p>
+      </div>
+    </section>
+
+    <!-- Latest Recipes Section -->
+    <section class="container mx-auto px-4 py-12">
+      <div class="flex items-center justify-center my-5">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search"
+          class="w-full max-w-2xl px-6 py-3 text-gray-800 border"
+        />
+        <button
+          id="search-button"
+          class="bg-orange-500 hover:bg-orange-600 text-white p-3 transition duration-300 ease-in-out"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+
+      <h2 class="text-4xl font-bold text-gray-800 text-center my-10">
+        Latest Recipes
+      </h2>
+      <div
+        id="recipes-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+      >
+        <!-- Recipe cards will be dynamically loaded here -->
+        <p
+          id="loading-message"
+          class="col-span-full text-center text-gray-600 hidden"
+        >
+          Loading recipes...
+        </p>
+        <p
+          id="no-results-message"
+          class="col-span-full text-center text-gray-600 hidden"
+        >
+          No recipes found. Try a different search term!
+        </p>
+      </div>
+    </section>
+
+    <!-- Meal Details Modal -->
+    <div
+      id="meal-details-modal"
+      class="fixed inset-0 hidden items-center justify-center p-4 modal-overlay"
+    >
+      <div
+        class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300 ease-out p-6"
+      >
+        <button
+          id="close-modal-button"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold"
+        >
+          &times;
+        </button>
+        <div id="modal-content">
+          <!-- Content will be loaded here by JavaScript -->
+          <div class="flex flex-col items-center">
+            <img
+              id="modal-meal-image"
+              src=""
+              alt=""
+              class="w-full h-64 object-cover rounded-lg mb-4"
+            />
+            <h3
+              id="modal-meal-name"
+              class="text-3xl font-bold text-gray-800 mb-4 text-center"
+            ></h3>
+            <div class="w-full overflow-hidden">
+              <h4 class="text-xl font-semibold text-gray-700 mb-2">
+                Instructions:
+              </h4>
+              <p
+                id="modal-meal-instructions"
+                class="text-gray-700 mb-6 leading-relaxed"
+              ></p>
+              <h4 class="text-xl font-semibold text-gray-700 mb-2">
+                Ingredients:
+              </h4>
+              <ul
+                id="modal-meal-ingredients"
+                class="list-disc list-inside text-gray-700 max-h-48 overflow-y-auto ingredients-list pr-2"
+              >
+                <!-- Ingredients will be listed here -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-center">
+          <button
+            id="modal-close-button-bottom"
+            class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-8 rounded-xl font-medium transition duration-300 ease-in-out"
+          >
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-4">
+      <div
+        class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between"
+      >
+        <div class="text-sm mb-2 sm:mb-0">
+          <p>Copyright © 2025 - All right reserved</p>
+        </div>
+
+        <div class="flex space-x-4">
+          <a href="#" class="text-white hover:text-gray-400">
+            <i class="fab fa-twitter fa-lg"></i>
+          </a>
+
+          <a href="#" class="text-white hover:text-gray-400">
+            <i class="fab fa-youtube fa-lg"></i>
+          </a>
+
+          <a href="#" class="text-white hover:text-gray-400">
+            <i class="fab fa-facebook-f fa-lg"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./asset/app.js"></script>
+  </body>
+</html>
