@@ -1,11 +1,8 @@
-body {
-  font-family: "Inter", sans-serif;
-  background-color: #f8f8f8;
-}
+@import "tailwindcss";
 
 /* hero background */
 .hero-bg {
-  background-image: url("./images/page-title.jpg");
+  background-image: url("../images/page-title.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -26,7 +23,7 @@ body {
   z-index: -1;
 }
 
-/* Modal overlay */
+/* Modal */
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 999;
@@ -38,6 +35,6 @@ body {
 }
 
 .ingredients-list {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

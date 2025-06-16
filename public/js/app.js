@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to display/hide messages
   function displayMessage(element, show) {
+    console.log(`displayMessage called for ${element.id}: show = ${show}`);
     if (show) {
       element.classList.remove("hidden");
     } else {
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Function to show the modal
+  // Function to show the modal (rest of the code is unchanged)
   function showModal() {
     mealDetailsModal.classList.remove("hidden");
     mealDetailsModal.classList.add("flex");
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 10);
   }
 
-  // Function to hide the modal
+  // Function to hide the modal (rest of the code is unchanged)
   function hideModal() {
     mealDetailsModal
       .querySelector("div")
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300);
   }
 
-  // Event listener for closing the modal
+  // Event listener for closing the modal (rest of the code is unchanged)
   closeModalButton.addEventListener("click", hideModal);
   modalCloseButtonBottom.addEventListener("click", hideModal);
   mealDetailsModal.addEventListener("click", (event) => {
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Function to fetch and display meal details in modal
+  // Function to fetch and display meal details in modal (rest of the code is unchanged)
   async function fetchAndDisplayMealDetails(mealId) {
     try {
       const response = await fetch(
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchAndDisplayMeals(searchTerm = "") {
     recipesContainer.innerHTML = "";
     displayMessage(loadingMessage, true);
-    displayMessage(noResultsMessage, false);
+    displayMessage(noResultsMessage, false); // Hides it at the start of search
     searchButton.disabled = true;
 
     try {
@@ -122,36 +123,37 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const data = await response.json();
 
+      console.log("API Response Data:", data); // Log the full API response
+      console.log("data.meals:", data.meals); // Log the data.meals property
+
       displayMessage(loadingMessage, false);
 
-      if (data.meals) {
+      if (data.meals && data.meals.length > 0) {
+        console.log("Meals found, displaying cards.");
         const mealsToDisplay = data.meals.slice(0, 50);
         mealsToDisplay.forEach((meal) => {
           const mealCard = `
-                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 duration-300">
-                                    <img src="${
-                                      meal.strMealThumb
-                                    }/preview" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E0E0/333333?text=No+Image';" alt="${
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 duration-300">
+              <img src="${
+                meal.strMealThumb
+              }/preview" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E0E0/333333?text=No+Image';" alt="${
             meal.strMeal
           }" class="w-full h-48 object-cover">
-                                    <div class="p-6">
-                                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${
-                                          meal.strMeal
-                                        }</h3>
-                                        <p class="text-gray-600 text-sm mb-4">${
-                                          meal.strInstructions
-                                            ? meal.strInstructions.substring(
-                                                0,
-                                                100
-                                              ) + "..."
-                                            : "No instructions available."
-                                        }</p>
-                                        <button class="view-details-button w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-medium transition duration-300 ease-in-out" data-meal-id="${
-                                          meal.idMeal
-                                        }">View Details</button>
-                                    </div>
-                                </div>
-                            `;
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">${
+                  meal.strMeal
+                }</h3>
+                <p class="text-gray-600 text-sm mb-4">${
+                  meal.strInstructions
+                    ? meal.strInstructions.substring(0, 100) + "..."
+                    : "No instructions available."
+                }</p>
+                <button class="view-details-button w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg font-medium transition duration-300 ease-in-out" data-meal-id="${
+                  meal.idMeal
+                }">View Details</button>
+              </div>
+            </div>
+          `;
           recipesContainer.insertAdjacentHTML("beforeend", mealCard);
         });
 
@@ -164,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         });
       } else {
+        console.log("No meals found, displaying no-results message.");
         displayMessage(noResultsMessage, true);
       }
     } catch (error) {
